@@ -4,5 +4,5 @@ python-dotenv
 whitenoise
 django-theme-pixel==1.0.3
 
-# psycopg2-binary
+psycopg2-binary
 # mysqlclient
