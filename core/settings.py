@@ -15,9 +15,10 @@ import random
 import string
 from pathlib import Path
 
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
+import dj_database_url
 
-load_dotenv()  # take environment variables from .env.
+# load_dotenv()  # take environment variables from .env.
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -94,31 +95,31 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DB_ENGINE   = os.environ.get('DB_ENGINE'   , None)
-DB_USERNAME = os.environ.get('DB_USERNAME' , None)
-DB_PASS     = os.environ.get('DB_PASS'     , None)
-DB_HOST     = os.environ.get('DB_HOST'     , None)
-DB_PORT     = os.environ.get('DB_PORT'     , None)
-DB_NAME     = os.environ.get('DB_NAME'     , None)
+# DB_ENGINE   = os.environ.get('DB_ENGINE'   , None)
+# DB_USERNAME = os.environ.get('DB_USERNAME' , None)
+# DB_PASS     = os.environ.get('DB_PASS'     , None)
+# DB_HOST     = os.environ.get('DB_HOST'     , None)
+# DB_PORT     = os.environ.get('DB_PORT'     , None)
+# DB_NAME     = os.environ.get('DB_NAME'     , None)
 
-if DB_ENGINE and DB_NAME and DB_USERNAME:
-    DATABASES = { 
-      'default': {
-        'ENGINE'  : 'django.db.backends.' + DB_ENGINE, 
-        'NAME'    : DB_NAME,
-        'USER'    : DB_USERNAME,
-        'PASSWORD': DB_PASS,
-        'HOST'    : DB_HOST,
-        'PORT'    : DB_PORT,
-        }, 
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'db.sqlite3',
-        }
-    }
+# if DB_ENGINE and DB_NAME and DB_USERNAME:
+#     DATABASES = { 
+#       'default': {
+#         'ENGINE'  : 'django.db.backends.' + DB_ENGINE, 
+#         'NAME'    : DB_NAME,
+#         'USER'    : DB_USERNAME,
+#         'PASSWORD': DB_PASS,
+#         'HOST'    : DB_HOST,
+#         'PORT'    : DB_PORT,
+#         }, 
+#     }
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': 'db.sqlite3',
+#         }
+#     }
 
 # DATABASES = {
 #     'default': {
@@ -131,6 +132,13 @@ else:
 #     DATABASES = {
 #         'default': env.db()
 #     }
+DATABASES = {
+    'default': dj_database_url.config(
+        # Feel free to alter this value to suit your needs.
+        default='postgresql://postgres:postgres@localhost:5432/mysite',
+        conn_max_age=600
+    )
+}
 
 DATABASES = {
     'default': {
