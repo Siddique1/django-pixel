@@ -94,12 +94,12 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DB_ENGINE   = os.getenv('DB_ENGINE'   , None)
-DB_USERNAME = os.getenv('DB_USERNAME' , None)
-DB_PASS     = os.getenv('DB_PASS'     , None)
-DB_HOST     = os.getenv('DB_HOST'     , None)
-DB_PORT     = os.getenv('DB_PORT'     , None)
-DB_NAME     = os.getenv('DB_NAME'     , None)
+DB_ENGINE   = os.environ.get('DB_ENGINE'   , None)
+DB_USERNAME = os.environ.get('DB_USERNAME' , None)
+DB_PASS     = os.environ.get('DB_PASS'     , None)
+DB_HOST     = os.environ.get('DB_HOST'     , None)
+DB_PORT     = os.environ.get('DB_PORT'     , None)
+DB_NAME     = os.environ.get('DB_NAME'     , None)
 
 if DB_ENGINE and DB_NAME and DB_USERNAME:
     DATABASES = { 
@@ -180,8 +180,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-#if not DEBUG:
-#    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+if not DEBUG:
+   STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
