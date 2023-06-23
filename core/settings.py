@@ -135,7 +135,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 DATABASES = {
     'default': dj_database_url.config(
         # Feel free to alter this value to suit your needs.
-        default='postgresql://postgres:postgres@localhost:5432/db_at_render',
+        default=os.environ.get('DATABASE_URL'),
         conn_max_age=600
     )
 }
