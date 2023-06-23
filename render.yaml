@@ -7,7 +7,10 @@ services:
      buildCommand: "./build.sh"
      startCommand: "gunicorn core.wsgi:application"
      envVars:
-        - key: DEBUG
+        - key: DATABASE_URL
+          fromDatabase:
+             name: django-pixel
+             property: connectionString
           value: False
         - key: SECRET_KEY
           generateValue: true
